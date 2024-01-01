@@ -1,0 +1,5 @@
+<!-- change link directs -->
+<!-- edit story #1 -->
+<!-- find a framework that allows resuabilty for the nav bar (kinda like a function's resuability) -->
+scrolling changes the blob change smoothly (transition/animation. see how poppr did it)
+<!-- the list in article one -->

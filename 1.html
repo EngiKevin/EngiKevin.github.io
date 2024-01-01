@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 98vh;
+            overflow: hidden;
+        }
+
+        img {
+            width: 1500px;
+        }
+
+        .magnifier {
+            position: absolute;
+            z-index: 1;
+            width: 900px;
+            /* would need to find the image's aspect ratio and apply it here through stored css variables and values*/
+            height: 500px;
+            box-shadow: 0 0 100px black;
+            background-color: rgba(42, 52, 52, 0.585);
+            pointer-events: none;
+            /* background-size: 240% 240%; */
+            /* makes the size of the image for showing it */
+            /* Initial background size for zoom effect */
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="zsi4mwegkyo61.jpg" alt="" id="object">
+</body>
+<script>
+    let imageObject = document.getElementById("object");
+    let magnifier;
+
+    imageObject.addEventListener("mouseenter", (e) => {
+        magnifier = document.createElement("div");
+        magnifier.classList.add('magnifier');
+        document.body.appendChild(magnifier);
+    });
+
+    imageObject.addEventListener("mousemove", (e) => {
+        if (!magnifier) return; // magnifier may not be created on initial mousemove
+        let magnifierProperties = magnifier.getBoundingClientRect();
+        let imageObjectProperties = imageObject.getBoundingClientRect();
+
+        let leftPosition = e.clientX - magnifierProperties.width / 2;
+        let topPosition = e.clientY - magnifierProperties.height / 2;
+
+        // Check if magnifier is within image boundaries
+        if (leftPosition < imageObjectProperties.left) {
+            leftPosition = imageObjectProperties.left;
+        } else if (leftPosition + magnifierProperties.width > imageObjectProperties.right) {
+            leftPosition = imageObjectProperties.right - magnifierProperties.width;
+        }
+
+        if (topPosition < imageObjectProperties.top) {
+            topPosition = imageObjectProperties.top;
+        } else if (topPosition + magnifierProperties.height > imageObjectProperties.bottom) {
+            topPosition = imageObjectProperties.bottom - magnifierProperties.height;
+        }
+
+        magnifier.style.left = leftPosition + "px";
+        magnifier.style.top = topPosition + "px";
+
+        // Calculate zoomed-in background position based on mouse position
+        imageObject.addEventListener("mousemove", (e) => {
+            // ... (previous code)
+
+            // Calculate zoomed-in background position based on mouse position
+            
+            let zoomX = ((e.clientX - imageObjectProperties.left - magnifierProperties.width / 2) / (imageObjectProperties.width - magnifierProperties.width)) * 100;
+            let zoomY = ((e.clientY - imageObjectProperties.top - magnifierProperties.height / 2) / (imageObjectProperties.height - magnifierProperties.height)) * 100;
+
+            // Ensure that zoomX and zoomY are clamped between 0 and 100
+            zoomX = Math.max(0, Math.min(100, zoomX));
+            zoomY = Math.max(0, Math.min(100, zoomY));
+
+            magnifier.style.backgroundImage = `url('${imageObject.src}')`;
+            magnifier.style.backgroundPosition = `${zoomX}% ${zoomY}%`;
+
+            // ok oringal/starting is at 0,0
+        });
+
+
+        magnifier.style.backgroundImage = `url('${imageObject.src}')`;
+        magnifier.style.backgroundPosition = `${zoomX}% ${zoomY}%`;
+        // ok oringal/starting is at 0,0
+    });
+
+    imageObject.addEventListener("mouseout", () => {
+        if (magnifier) {
+            magnifier.remove();
+            magnifier = null;
+        }
+    });
+</script>
+
+</html>

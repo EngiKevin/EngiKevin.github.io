@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            overflow: hidden;
+            background-color: aliceblue;
+        }
+
+        .testing-ground {
+            position: relative;
+            background-color: beige;
+        }
+
+        .circle-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 100px;
+            background-color: black;
+            position: absolute;
+            z-index: 2000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas class="testing-ground" id="testing-ground"></canvas>
+
+    <script>
+        function calculateDistance(x1, y1, x2, y2) {
+            const deltaX = x2 - x1;
+            const deltaY = y2 - y1;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            return distance;
+        }
+
+        const canvas = document.getElementById('testing-ground');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const allCircleDotsXY = [];
+        for (let i = 0; i < 1000; i++) {
+            const x = Math.floor(Math.random() * (window.innerWidth - 40) + 20);
+            const y = Math.floor(Math.random() * (window.innerHeight - 40) + 20);
+            const width = 5;
+            const height = 5;
+            ctx.beginPath();
+            ctx.arc(x, y, 1, 0, 2 * Math.PI);
+            ctx.closePath();
+            // red = 60 * i;
+            // green = 60 * i;
+            // blue = 60 * i;
+            // ctx.fillStyle = `rgb(${red},${green},${blue})`;
+            ctx.fillStyle = "black";
+            ctx.fill();
+            allCircleDotsXY.push([x, y]);
+        }
+
+        // function findElementIndex(array, element) {
+        //     for (let i = 0; i < array.length; i++) {
+        //         for (let j = 0; j < array[i].length; j++) {
+        //             if (array[i][j] === element) {
+        //                 return i;
+        //             }
+        //         }
+        //     }
+        // }
+
+        function findElementIndex(array, element) {
+            for (let i = 0; i < array.length; i++) {
+                if (array[i][0] === element[0] && array[i][1] === element[1]) {
+                    return i;
+                }
+            }
+            return -1; // Return -1 if the element is not found
+        }
+
+        const connectedDots = [];
+        let remainingDots = [...allCircleDotsXY];
+
+        function appear() {
+            let currentDot = allCircleDotsXY[0];
+            connectedDots.push(currentDot);
+
+            while (connectedDots.length < allCircleDotsXY.length) {
+                remainingDots.splice(findElementIndex(remainingDots, connectedDots[connectedDots.length - 1]), 1);
+
+                // remainingDots = allCircleDotsXY.filter(dot => !connectedDots.includes(dot));
+
+                let shortestDistance = 100000;
+
+                for (let i = 0; i < remainingDots.length; i++) {
+                    const otherDot = remainingDots[i];
+                    const currentDistance = calculateDistance(currentDot[0], currentDot[1], otherDot[0], otherDot[1]);
+
+                    if (currentDistance < shortestDistance) {
+                        shortestDistance = currentDistance;
+                        nextDot = otherDot;
+                    }
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(currentDot[0], currentDot[1]);
+                ctx.lineTo(nextDot[0], nextDot[1]);
+                ctx.stroke();
+                currentDot = nextDot;
+                connectedDots.push(nextDot);
+
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(currentDot[0], currentDot[1]);
+            ctx.lineTo(connectedDots[0][0], connectedDots[0][1]);
+            ctx.stroke();
+        }
+        appear();
+    </script>
+</body>
+
+</html>

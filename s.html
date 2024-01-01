@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            overflow: hidden;
+            background-color: aliceblue;
+        }
+
+        .testing-ground {
+            position: relative;
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas class="testing-ground" id="testing-ground"></canvas>
+
+    <script>
+        function calculateDistance(x1, y1, x2, y2) {
+            const deltaX = x2 - x1;
+            const deltaY = y2 - y1;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            return distance;
+        }
+
+        const canvas = document.getElementById('testing-ground');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const allCircleDotsXY = [];
+
+        for (let i = 0; i < 1000; i++) {
+            const x = Math.floor(Math.random() * (window.innerWidth - 40) + 20);
+            const y = Math.floor(Math.random() * (window.innerHeight - 40) + 20);
+            const width = 20;
+            const height = 20;
+            ctx.beginPath();
+            ctx.arc(x, y, 2, 0, 2 * Math.PI);
+            ctx.closePath();
+            red = 45 * i;
+            green = 45 * i;
+            blue = 45 * i;
+            ctx.fillStyle = `rgb(${red},${green},${blue})`;
+            ctx.fillStyle = "black";
+            ctx.fill();
+            allCircleDotsXY.push([x, y]);
+        }
+
+
+
+        //this is what creates the duplicates...how to fix? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //oh, because there could be cdx in the same point resutling in repetition and unexpected results
+
+        //oh, simply make it so the points randomly makes it so if it's already done, do another point (solution)
+        //edit: nope
+        // function findElementIndex(array, element) {
+        //     for (let i = 0; i < array.length; i++) {
+        //         for (let j = 0; j < array[i].length; j++) {
+        //             if (array[i][j] === element) {
+        //                 return i;
+        //             }
+        //         }
+        //     }
+        // }
+        function findElementIndex(array, element) {
+            for (let i = 0; i < array.length; i++) {
+                if (array[i][0] === element[0] && array[i][1] === element[1]) {
+                    return i;
+                }
+            }
+            return -1; // Return -1 if the element is not found
+        }
+
+
+
+
+        priorDots = []
+        connectedDots = [];
+
+
+        const firstCDX = allCircleDotsXY[0][0];
+        const firstCDY = allCircleDotsXY[0][1];
+
+
+        let remainingDots = [...allCircleDotsXY];
+
+        function appear() {
+            currentDot = allCircleDotsXY[0];
+            connectedDots.push(currentDot);
+            for (const [index, comparedDot] of allCircleDotsXY.entries()) {
+                if (index == 0) {
+                    cdx = comparedDot[0];
+                    cdy = comparedDot[1];
+                    remainingDots.splice(findElementIndex(allCircleDotsXY, comparedDot), 1);
+                }
+                else {
+                    cdx = shortestODX;
+                    cdy = shortestODY;
+                    // connectedDots.push(findElementIndex(remainingDots, cdx))
+                    priorDots = (findElementIndex(remainingDots, shortestDot));
+                    remainingDots.splice(priorDots, 1);
+                }
+
+                shortestDistance = 1000000;
+                for (const [i, otherDot] of remainingDots.entries()) {
+
+                    odx = otherDot[0];
+                    ody = otherDot[1];
+                    let currentDistance = calculateDistance(cdx, cdy, odx, ody)
+                    if (currentDistance < shortestDistance) {
+                        shortestDistance = currentDistance;
+                        shortestODX = odx;
+                        shortestODY = ody;
+                        shortestDot=otherDot;
+                    }
+                }
+                ctx.beginPath();
+                ctx.moveTo(cdx, cdy);
+                ctx.lineTo(shortestODX, shortestODY);
+                ctx.stroke();
+            }
+        }
+        appear();
+
+
+
+
+    </script>
+</body>
+
+</html>

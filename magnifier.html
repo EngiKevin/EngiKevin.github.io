@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 98vh;
+            overflow: hidden;
+        }
+
+        img {
+            width: 1200px;
+        }
+
+        .magnifier {
+            position: absolute;
+            z-index: 1;
+            width: 500px;
+            height: 500px;
+            border:1.5px black solid;
+            box-shadow: 0px 0px 100px black;
+            pointer-events: none;
+            background-image: url("zsi4mwegkyo61.jpg");
+        }
+    </style>
+</head>
+
+<body>
+    <img src="zsi4mwegkyo61.jpg" alt="" id="object">
+</body>
+<script>
+    let imageObject = document.getElementById("object");
+    let magnifier;
+
+    imageObject.addEventListener("mouseenter", (e) => {
+        magnifier = document.createElement("div");
+        magnifier.classList.add('magnifier');
+        let magnifierProperties = magnifier.getBoundingClientRect();
+        let imageObjectProperties = imageObject.getBoundingClientRect();
+        document.body.appendChild(magnifier);
+        if (e.clientX - magnifierProperties.width / 2 > window.innerWidth / 2 - imageObjectProperties.width / 2 && e.clientX + magnifierProperties.width / 2 < imageObjectProperties.right) {
+            magnifier.style.left = e.clientX - magnifierProperties.width / 2 + "px";
+            // leftPosition = imageObjectProperties.left;
+        }
+    });
+
+    //ok g jsyt rfucngiset it to o viarbale sig to like make it thstuff sirhetw ajs btn tnth e hre you tot isouclc lsiek aee ti twork and sutff
+    imageObject.addEventListener("mousemove", (e) => {
+        if (!magnifier) return; // magnifier may not be created on initial mousemove
+        magnifierProperties = magnifier.getBoundingClientRect();
+        imageObjectProperties = imageObject.getBoundingClientRect();
+
+        // let leftPosition = e.clientX - magnifierProperties.width / 2;
+        let topPosition = e.clientY - magnifierProperties.height / 2;
+        let test=e.clientX - magnifierProperties.width / 2;
+        // Check if magnifier is within image boundaries
+
+        // else{
+
+        // }else if (e.clientX - magnifierProperties.width / 2 > window.outerWidth / 2 - imageObjectProperties.width / 2 && e.clientX + magnifierProperties.width / 2 < imageObjectProperties.right) {
+        //     magnifier.style.left = e.clientX - magnifierProperties.width / 2 + "px";
+        //     // leftPosition = imageObjectProperties.left;
+        // }
+        if (e.clientX - magnifierProperties.width / 2 < window.outerWidth / 2 - imageObjectProperties.width / 2) {
+            test= imageObjectProperties.left;
+        } else if (e.clientX + magnifierProperties.width / 2 > window.outerWidth / 2 + imageObjectProperties.width / 2) {
+            test= imageObjectProperties.right - magnifierProperties.width;
+        }
+        magnifier.style.left = test+ "px";
+
+
+
+        // leftPosition = imageObjectProperties.right - magnifierProperties.width;
+
+
+        if (topPosition < imageObjectProperties.top) {
+            topPosition = imageObjectProperties.top;
+        } else if (topPosition + magnifierProperties.height > imageObjectProperties.bottom) {
+            topPosition = imageObjectProperties.bottom - magnifierProperties.height;
+        }
+
+        // magnifier.style.left = leftPosition + "px";
+        magnifier.style.top = topPosition + "px";
+    });
+
+    imageObject.addEventListener("mouseout", () => {
+        if (magnifier) {
+            magnifier.remove();
+            magnifier = null;
+        }
+    });
+</script>
+
+</html>
