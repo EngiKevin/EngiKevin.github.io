@@ -39,7 +39,7 @@ class Header extends HTMLElement {
                 </li>
                 <li>
                     <a class="right" id="store" href="EngiXiongPaths.html">
-                        EngiXiong Paths
+                        Text Effect
                     </a>
                 </li>
             </div>
