@@ -20,7 +20,7 @@ class Header extends HTMLElement {
         <a href="https://engikevin.github.io/index.html" style="animation-delay: 0s;"
             class="the-contents">Home</a>
         <a href="https://engikevin.github.io/personal.html" style="animation-delay: 0.25s;" class="the-contents">About</a>
-        <a href="https://engikevin.github.io/EngiXiongPaths.html" style="animation-delay: 0.50s;" class="the-contents">engikevin Paths</a>
+        <a href="https://engikevin.github.io/EngiXiongPaths.html" style="animation-delay: 0.50s;" class="the-contents">Text Effect</a>
         </div>
 
     <div class="nav-bar">
