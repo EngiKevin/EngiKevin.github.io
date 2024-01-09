@@ -17,20 +17,20 @@ class Header extends HTMLElement {
 
     </div>
     <div class="mobile-nav-bar-contents">
-        <a href="https://engixiong.github.io/index.html" style="animation-delay: 0s;"
+        <a href="https://engikevin.github.io/index.html" style="animation-delay: 0s;"
             class="the-contents">Home</a>
-        <a href="https://engixiong.github.io/personal.html" style="animation-delay: 0.25s;" class="the-contents">About</a>
-        <a href="https://engixiong.github.io/EngiXiongPaths.html" style="animation-delay: 0.50s;" class="the-contents">EngiXiong Paths</a>
+        <a href="https://engikevin.github.io/personal.html" style="animation-delay: 0.25s;" class="the-contents">About</a>
+        <a href="https://engikevin.github.io/EngiXiongPaths.html" style="animation-delay: 0.50s;" class="the-contents">engikevin Paths</a>
         </div>
 
     <div class="nav-bar">
         <ul>
             <div class="logo-container">
-                <a href="https://engixiong.github.io/index.html"><img draggable="false" class="logo" src="logo.png" alt=""></a>
+                <a href="https://engikevin.github.io/index.html"><img draggable="false" class="logo" src="logo.png" alt=""></a>
             </div>
             <div>
                 <li>
-                    <a class="right" href="https://engixiong.github.io/personal.html">
+                    <a class="right" href="https://engikevin.github.io/personal.html">
                         About
                     </a>
                 </li>
