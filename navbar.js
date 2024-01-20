@@ -20,7 +20,7 @@ class Header extends HTMLElement {
         <a href="https://engikevin.github.io/index.html" style="animation-delay: 0s;"
             class="the-contents">Home</a>
         <a href="https://engikevin.github.io/personal.html" style="animation-delay: 0.25s;" class="the-contents">About</a>
-        <a href="https://engikevin.github.io/EngiXiongPaths.html" style="animation-delay: 0.50s;" class="the-contents">Text Effect</a>
+        <a href="https://engikevin.github.io/EngiXiongPaths.html" style="animation-delay: 0.50s;" class="the-contents">Projects</a>
         </div>
 
     <div class="nav-bar">
@@ -39,7 +39,7 @@ class Header extends HTMLElement {
                 </li>
                 <li>
                     <a class="right" id="store" href="EngiXiongPaths.html">
-                        Text Effect
+                        Projects
                     </a>
                 </li>
             </div>
