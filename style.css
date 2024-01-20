@@ -856,10 +856,7 @@ a.article:active {
 
 .store-menu {
     background-color: rgba(0, 0, 0);
-    position: fixed;
-    z-index: 1;
     width: 100%;
-    height: 100%;
     /* display: none; */
     /* animation: appear1 2s forwards; */
 }
