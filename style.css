@@ -763,6 +763,7 @@ a.article:active {
     font-family: 'Roboto', sans-serif;
     list-style: decimal;
     margin-left: 45px;
+    margin-bottom:10px
 }
 
 .my-article ol li {
