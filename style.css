@@ -1008,24 +1008,25 @@ a.article:active {
 
 .home-thing a {
     color: black;
-    padding: 45px;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding: 10px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     transition: all 0.3s;
 
     opacity: 0;
     animation: riseUp 1.6s forwards
 }
 
-.home-thing:hover {
-    background-color: #122935;
-
-}
-
 .home-thing a:hover {
-    color: rgb(150, 208, 255);
+    color: rgb(255, 235, 235);
 
 }
+.home-thing:hover {
+    background-color: #000000;
+
+}
+
+ 
 
 @media only screen and (max-width: 700px) {
     .store-menu {
