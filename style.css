@@ -939,7 +939,7 @@ a.article:active {
 
 
 .projects {
-    background-color: #050505;
+    background-color: black;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
