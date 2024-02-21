@@ -997,21 +997,21 @@ a.article:active {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: #b9b8b8;
     border-radius: 100px;
     color: rgb(0, 0, 0);
     font-family: serif;
     padding: 10px;
-    transition: all 1.5s;
-
+    transition: all 0.8s;
+    border:1px rgb(255, 235, 235) solid;
 }
 
 .home-thing a {
     color: black;
-    padding: 10px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    transition: all 0.3s;
+    padding: 5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    transition: all 0.2s;
 
     opacity: 0;
     animation: riseUp 1.6s forwards
@@ -1022,7 +1022,7 @@ a.article:active {
 
 }
 .home-thing:hover {
-    background-color: #000000;
+    background-color: #1e1d1d;
 
 }
 
@@ -1034,14 +1034,6 @@ a.article:active {
         flex-direction: column;
 
     }
-
-
-
-
-
-
-
-
 
 
     .home-thing a {
