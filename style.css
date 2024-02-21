@@ -1032,7 +1032,7 @@ a.article:active {
     .store-menu {
         display: flex;
         flex-direction: column;
-
+margin-top:25px;
     }
 
 
@@ -1043,6 +1043,7 @@ a.article:active {
 
     .home-thing {
         margin-top: 20px;
+        margin-right:0px
     }
 
     .margin-thing {
